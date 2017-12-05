@@ -30,7 +30,9 @@ public class Main {
         {
             se.printStackTrace();
         }
-        //DB.closeDB();
+        DB.closeDB();
+
+
 
         System.out.print("Input Lecturer Name:");
         academic UPL = new academic();

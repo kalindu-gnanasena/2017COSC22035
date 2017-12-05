@@ -2,12 +2,18 @@ package DBConnect;
 import java.sql.*;
 public class dbConnect {
     //public String url = "localhost";
-    public String url = "172.16.20.180";
-    public String port = "3306"; //8889
-    public String database = "hacklnjava";
-    public String user = "admin";
-    public String password = "stcs";//root
-    public String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private String url = "172.16.20.180";
+    private String port = "3306"; //8889
+    private String oport="1521";
+    private String ourl="orcl.ictc.kln.ac.lk";
+
+    private String database = "hacklnjava";
+    private String user = "admin";
+    private String ouser="stcs_tcw";
+    private String opw = "hello";
+    private String oSID="STCS";
+    private String password = "stcs";//root
+    private String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     Connection conn = null;
 
     //Function to Connect to DB
@@ -24,6 +30,19 @@ public class dbConnect {
         //return dbstmt;
     }
 
+    public void conn2DBOrcl()
+    {
+        String DB_URL="jdbc:oracle:thin@" +ourl + ":" + oport+":"+oSID;
+        try {
+            conn = DriverManager.getConnection(DB_URL,ouser,opw);
+            System.out.println("connected to oracle db");
+        }
+        catch (SQLException SE)
+        {
+            SE.printStackTrace();
+        }
+    }
+
 
     public Statement Conn2DB() {
         String DB_URL = "jdbc:mysql://" + url + ":" + port + "/" + database;
@@ -37,12 +56,12 @@ public class dbConnect {
         }
         return dbstmt;
     }
-}
-   /* public void closeDB()
-    {
-        try{conn.close();
-    }catch (SQLException SE)
-        {
+
+    public void closeDB() {
+        try {
+            conn.close();
+        } catch (SQLException SE) {
             SE.printStackTrace();
         }
-}*/
+    }
+}
