@@ -11,6 +11,26 @@ public class Main {
 
         DBConnect.dbConnect DB = new dbConnect();//Object from DB connect
         DB.Connect2DB();//Connect to DB
+        stml=DB.Conn2DB();
+        String query="select * from userdetails";
+        String insertquery="insert into userdetails(`UserID`, `UserName`, `Email`, `Password`, `Role`) VALUES(8,'Vijitha','vijay@gmail.com','vaijay',1)";
+        try
+        {
+            //stml.executeUpdate(insertquery);
+            ResultSet stc=stml.executeQuery(query);
+            while(stc.next())
+            {
+                int uID=stc.getInt("UserID");
+                String pw = stc.getString("Password");
+                System.out.println("userId from id "+ uID + " PASSWORD: " + pw);
+
+            }
+            }
+        catch (SQLException se)
+        {
+            se.printStackTrace();
+        }
+        //DB.closeDB();
 
         System.out.print("Input Lecturer Name:");
         academic UPL = new academic();
