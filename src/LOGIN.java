@@ -10,7 +10,7 @@ public class LOGIN {
     private JButton exitButton;
     public static JFrame loginFR = new JFrame("Login Screen");
 
-    public LOGIN() {
+    //public LOGIN() {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,14 +25,14 @@ public class LOGIN {
                 loginCheck(username,pw);
             }
         });
-    }
+    }//
 
     public static void main(String[] args) {
         loginFR.setContentPane(new LOGIN().panel1);
         loginFR.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFR.pack();
         loginFR.setVisible(true);
-    }
+    }//
 
     private void loginCheck(String frusername,String frPW)
     {
