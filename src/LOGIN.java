@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 
 public class LOGIN {
     private JPanel panel1;
-    private JTextField textField1;
-    private JPasswordField passwordField1;
+    private JTextField userField;
+    private JPasswordField pwField;
     private JButton LOGINButton;
     private JButton exitButton;
     public static JFrame loginFR = new JFrame("Login Screen");
@@ -20,7 +20,9 @@ public class LOGIN {
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"NOT COMPLETED");
+                String username=userField.getText();
+                String pw=String.valueOf(pwField.getPassword());
+                loginCheck(username,pw);
             }
         });
     }
@@ -30,5 +32,14 @@ public class LOGIN {
         loginFR.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFR.pack();
         loginFR.setVisible(true);
+    }
+
+    private void loginCheck(String frusername,String frPW)
+    {
+        String inusername="cosc";
+        String inpw="22035";
+        if(frusername.equals(inusername)&&frPW.equals(inpw))
+            JOptionPane.showMessageDialog(null,"Username and Password correct");
+        else JOptionPane.showMessageDialog(null,"Incorrect");
     }
 }
