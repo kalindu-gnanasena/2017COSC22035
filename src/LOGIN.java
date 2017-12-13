@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import DBConnect.*;
+
 
 public class LOGIN {
     private JPanel panel1;
@@ -10,7 +17,7 @@ public class LOGIN {
     private JButton exitButton;
     public static JFrame loginFR = new JFrame("Login Screen");
 
-    //public LOGIN() {
+    public LOGIN() {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,7 +32,7 @@ public class LOGIN {
                 loginCheck(username,pw);
             }
         });
-    }//
+    }
 
     public static void main(String[] args) {
         loginFR.setContentPane(new LOGIN().panel1);
@@ -36,10 +43,29 @@ public class LOGIN {
 
     private void loginCheck(String frusername,String frPW)
     {
-        String inusername="cosc";
-        String inpw="22035";
-        if(frusername.equals(inusername)&&frPW.equals(inpw))
-            JOptionPane.showMessageDialog(null,"Username and Password correct");
-        else JOptionPane.showMessageDialog(null,"Incorrect");
+        String inusername=null;
+        String inpw=null;
+        dbConnect dbConn=new dbConnect();
+        Statement stml=null;
+        try {
+            String query = "SELECT * FROM userdetails where UserName='"+frusername+"'";
+            stml =dbConn.Conn2DB();
+            ResultSet RS =stml.executeQuery(query);
+            RS.first();
+            inusername=frusername;
+            inpw=RS.getString("Password");
+
+        }
+        catch (SQLException SE)
+        {
+            SE.printStackTrace();
+        }
+
+
+        if(frusername.equals(inusername)&&frPW.equals(inpw)) {
+            JOptionPane.showMessageDialog(null, "Username and Password correct");
+            loginFR.setVisible(false);
+            new UseDetails(frusername);
+        }else JOptionPane.showMessageDialog(null,"Incorrect");
     }
 }
